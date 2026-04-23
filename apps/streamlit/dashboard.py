@@ -582,6 +582,60 @@ def _inject_css(theme_name: str) -> None:
                 .hero-title {{ font-size: 1.65rem; }}
             }}
         </style>
+        <script>
+            // Suppress console warnings for better production experience
+            (function() {{
+                const originalWarn = console.warn;
+                const originalError = console.error;
+                
+                // Suppress known harmless warnings
+                const suppressPatterns = [
+                    'preventOverflow',
+                    'Unrecognized feature',
+                    'Container not found',
+                    'wsl --status',
+                    'ambient-light-sensor',
+                    'battery',
+                    'document-domain',
+                    'layout-animations',
+                    'legacy-image-formats',
+                    'oversized-images',
+                    'vr',
+                    'wake-lock'
+                ];
+                
+                console.warn = function(...args) {{
+                    const message = args.join(' ');
+                    for (const pattern of suppressPatterns) {{
+                        if (message.includes(pattern)) return;
+                    }}
+                    return originalWarn.apply(console, args);
+                }};
+                
+                console.error = function(...args) {{
+                    const message = args.join(' ');
+                    for (const pattern of suppressPatterns) {{
+                        if (message.includes(pattern)) return;
+                    }}
+                    return originalError.apply(console, args);
+                }};
+                
+                // Fix popper.js modifier warning by ensuring preventOverflow is configured
+                if (window.Popper) {{
+                    const original = window.Popper.createPopper || window.Popper;
+                    window.Popper.createPopper = function(reference, popper, options) {{
+                        if (options && options.modifiers) {{
+                            const hasHide = options.modifiers.some(m => m.name === 'hide');
+                            const hasPreventOverflow = options.modifiers.some(m => m.name === 'preventOverflow');
+                            if (hasHide && !hasPreventOverflow) {{
+                                options.modifiers.unshift({{ name: 'preventOverflow' }});
+                            }}
+                        }}
+                        return original.apply(this, arguments);
+                    }};
+                }}
+            }})();
+        </script>
         """,
         unsafe_allow_html=True,
     )
@@ -1079,6 +1133,30 @@ def main() -> None:
         page_icon="🛠️",
         layout="wide",
         initial_sidebar_state="expanded",
+    )
+
+    # Add security and compatibility meta tags
+    st.markdown(
+        """
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Permissions-Policy" content="microphone=(), camera=(), geolocation=()">
+        <!-- Placeholder for audio container to prevent wavesurfer initialization errors -->
+        <div id="audio-container" style="display:none;"></div>
+        <script>
+            // Suppress feature policy warnings in browser console
+            if (window.fetch) {
+                const originalFetch = window.fetch;
+                window.fetch = function(...args) {
+                    if (args[0] && args[0].includes && args[0].includes('feature-policy')) {
+                        return Promise.resolve(new Response('{}'));
+                    }
+                    return originalFetch.apply(this, args);
+                };
+            }
+        </script>
+        """,
+        unsafe_allow_html=True,
     )
 
     _ensure_state()

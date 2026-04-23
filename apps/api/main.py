@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import logging
 import sys
 from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -16,8 +18,38 @@ if str(PROJECT_ROOT) not in sys.path:
 from agents.orchestrator import OrchestratorAgent
 from packages.schemas import DeviceMetadata, Question
 
-app = FastAPI(title="SystemDoctor AI API", version="1.0.0")
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+app = FastAPI(
+    title="SystemDoctor AI API",
+    version="1.0.0",
+    description="Enterprise AI-powered system diagnostics and remediation API",
+)
+
+# Add CORS middleware to allow cross-origin requests from Streamlit and other frontends
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, restrict to specific domains
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 orchestrator = OrchestratorAgent()
+
+
+# Add middleware for security headers
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    """Add security headers to all responses."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
 
 
 class StartSessionRequest(BaseModel):
@@ -38,7 +70,23 @@ class VerifyRequest(BaseModel):
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "ok"}
+    """Health check endpoint."""
+    logger.info("Health check requested")
+    return {"status": "ok", "service": "SystemDoctor AI API"}
+
+
+@app.get("/api/v1/app/event/open")
+def app_event_open() -> dict:
+    """Compatibility endpoint for Streamlit component initialization."""
+    logger.info("App event open requested")
+    return {"status": "ok", "message": "SystemDoctor AI is ready"}
+
+
+@app.post("/api/v1/app/event/open")
+def app_event_open_post() -> dict:
+    """Compatibility endpoint for Streamlit component initialization (POST)."""
+    logger.info("App event open POST requested")
+    return {"status": "ok", "message": "SystemDoctor AI is ready"}
 
 
 @app.post("/sessions")
@@ -113,4 +161,16 @@ def verify(session_id: str, payload: VerifyRequest) -> dict:
         "verification": result.model_dump(mode="json"),
         "status": session.status.value,
         "next_question": next_question.model_dump(mode="json") if next_question else None,
+    }
+
+
+# Global exception handler for comprehensive error responses
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    """Global exception handler for unhandled errors."""
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return {
+        "error": "Internal server error",
+        "detail": str(exc),
+        "status": 500,
     }
