@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import html
 import sys
 from pathlib import Path
+from textwrap import dedent
 from typing import Optional
 
 import streamlit as st
@@ -142,6 +144,10 @@ def _confidence_class(confidence: float) -> str:
     if confidence >= 0.45:
         return "medium"
     return "low"
+
+
+def _escape_html(value: object) -> str:
+    return html.escape("" if value is None else str(value))
 
 
 
@@ -698,14 +704,14 @@ def _render_workflow_rail(session: TroubleshootingSession) -> None:
             css_class += " complete"
         elif index == active_index:
             css_class += " active"
-        blocks.append(
+        blocks.append(dedent(
             f"""
             <div class="{css_class}">
                 <span class="stage-node-label">{label}</span>
                 <div class="stage-node-desc">{'Completed' if index < active_index else ('Current step' if index == active_index else 'Pending')}</div>
             </div>
             """
-        )
+        ).strip())
 
     st.markdown(f"<div class='stage-trail'>{''.join(blocks)}</div>", unsafe_allow_html=True)
 
@@ -742,28 +748,26 @@ def _render_metrics(session: TroubleshootingSession) -> None:
 
 
 def _bubble(role: str, title: str, content: str, meta: str = "") -> str:
-    return f"""
-    <div class="bubble {role}">
-        <div class="bubble-head">
-            <div class="bubble-title">{title}</div>
-            <div>{meta}</div>
+    return dedent(
+        f"""
+        <div class="bubble {role}">
+            <div class="bubble-head">
+                <div class="bubble-title">{_escape_html(title)}</div>
+                <div>{_escape_html(meta)}</div>
+            </div>
+            <div class="bubble-copy">{content}</div>
         </div>
-        <div class="bubble-copy">{content}</div>
-    </div>
-    """
+        """
+    ).strip()
 
 
 
 def _render_conversation(session: TroubleshootingSession, current_question: Optional[Question]) -> None:
-    st.markdown("<div class='conversation-shell'>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Troubleshooting Conversation</div>", unsafe_allow_html=True)
-    st.caption("The assistant will keep asking the next best question until the evidence is strong enough to diagnose safely.")
-
     bubbles = [
         _bubble(
             "user",
             "User issue",
-            session.user_issue,
+            _escape_html(session.user_issue).replace("\n", "<br>"),
             "Initial symptom description",
         ),
     ]
@@ -775,11 +779,11 @@ def _render_conversation(session: TroubleshootingSession, current_question: Opti
                 "ai",
                 "Triage summary",
                 (
-                    f"Category: <strong>{triage.category.value}</strong><br>"
-                    f"Severity: <strong>{triage.severity.value}</strong><br>"
-                    f"OS: <strong>{triage.inferred_os.value}</strong><br>"
+                    f"Category: <strong>{_escape_html(triage.category.value)}</strong><br>"
+                    f"Severity: <strong>{_escape_html(triage.severity.value)}</strong><br>"
+                    f"OS: <strong>{_escape_html(triage.inferred_os.value)}</strong><br>"
                     f"Confidence: <strong>{triage.confidence:.0%}</strong><br>"
-                    f"{triage.rationale}"
+                    f"{_escape_html(triage.rationale).replace(chr(10), '<br>')}"
                 ),
                 "Deterministic first-pass classification",
             )
@@ -790,15 +794,15 @@ def _render_conversation(session: TroubleshootingSession, current_question: Opti
             _bubble(
                 "ai",
                 "Assistant question",
-                qa.question,
-                qa.created_at.strftime("%H:%M UTC") if qa.created_at else "",
+                _escape_html(qa.question).replace("\n", "<br>"),
+                _escape_html(qa.created_at.strftime("%H:%M UTC") if qa.created_at else ""),
             )
         )
         bubbles.append(
             _bubble(
                 "user",
                 "User answer",
-                qa.answer,
+                _escape_html(qa.answer).replace("\n", "<br>"),
                 "Captured evidence",
             )
         )
@@ -808,13 +812,25 @@ def _render_conversation(session: TroubleshootingSession, current_question: Opti
             _bubble(
                 "ai",
                 "Next best question",
-                current_question.text,
+                _escape_html(current_question.text).replace("\n", "<br>"),
                 "Processing signal selection",
             )
         )
 
-    st.markdown("<div class='conversation-scroll'>" + "".join(bubbles) + "</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown(
+        dedent(
+        f"""
+        <div class="conversation-shell">
+            <div class="section-title">Troubleshooting Conversation</div>
+            <div class="diag-subtle" style="margin-bottom:0.85rem;">The assistant will keep asking the next best question until the evidence is strong enough to diagnose safely.</div>
+            <div class="conversation-scroll">
+                {''.join(bubbles)}
+            </div>
+        </div>
+        """
+        ).strip(),
+        unsafe_allow_html=True,
+    )
 
 
 
