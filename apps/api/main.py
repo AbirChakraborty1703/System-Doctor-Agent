@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import logging
+import os
 import sys
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -28,11 +30,18 @@ app = FastAPI(
     description="Enterprise AI-powered system diagnostics and remediation API",
 )
 
-# Add CORS middleware to allow cross-origin requests from Streamlit and other frontends
+# CORS configuration uses ALLOWED_ORIGINS to keep production deploys configurable.
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("ALLOWED_ORIGINS", "*").split(",")
+    if origin.strip()
+]
+allow_credentials = "*" not in allowed_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict to specific domains
-    allow_credentials=True,
+    allow_origins=allowed_origins or ["*"],
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -168,11 +177,14 @@ def verify(session_id: str, payload: VerifyRequest) -> dict:
 
 # Global exception handler for comprehensive error responses
 @app.exception_handler(Exception)
-async def global_exception_handler(request, exc):
+async def global_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     """Global exception handler for unhandled errors."""
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
-    return {
-        "error": "Internal server error",
-        "detail": str(exc),
-        "status": 500,
-    }
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "Internal server error",
+            "detail": "An unexpected server error occurred.",
+            "status": 500,
+        },
+    )
