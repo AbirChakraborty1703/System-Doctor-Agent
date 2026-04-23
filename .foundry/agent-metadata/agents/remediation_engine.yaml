@@ -1,0 +1,10 @@
+id: remediation_engine
+type: core
+owner: remediation-platform
+responsibility: Generate safe OS-specific fix plans
+inputs:
+  - diagnosis_ranking
+  - risk_policy
+outputs:
+  - remediation_plan
+  - risk_labels

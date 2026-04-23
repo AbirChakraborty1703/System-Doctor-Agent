@@ -1,0 +1,17 @@
+prompt_sets:
+  - id: system-default-v1
+    files:
+      - system/orchestrator.md
+      - system/triage.md
+      - system/diagnosis.md
+      - system/remediation.md
+      - system/verification.md
+  - id: specialist-default-v1
+    files:
+      - specialists/hardware.md
+      - specialists/software.md
+      - specialists/windows.md
+      - specialists/macos.md
+      - specialists/linux.md
+      - specialists/bios_boot.md
+      - specialists/update_driver.md

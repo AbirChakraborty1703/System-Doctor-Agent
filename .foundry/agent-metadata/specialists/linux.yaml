@@ -1,0 +1,5 @@
+id: linux
+type: specialist
+domain: os_linux
+owner: os-diagnostics
+responsibility: Linux distro-aware diagnosis and remediation guidance

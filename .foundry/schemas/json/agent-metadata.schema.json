@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentMetadata",
+  "type": "object",
+  "required": ["defaultEnvironment", "environments", "agents"],
+  "properties": {
+    "defaultEnvironment": {"type": "string"},
+    "environments": {"type": "object"},
+    "agents": {"type": "object"}
+  }
+}

@@ -1,0 +1,7 @@
+name: staging
+project_endpoint: ${FOUNDRY_PROJECT_ENDPOINT_STAGING}
+model_deployments:
+  triage: ${FOUNDRY_MODEL_TRIAGE_STAGING}
+  diagnosis: ${FOUNDRY_MODEL_DIAGNOSIS_STAGING}
+  remediation: ${FOUNDRY_MODEL_REMEDIATION_STAGING}
+logging_level: info

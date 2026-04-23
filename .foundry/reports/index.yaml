@@ -1,0 +1,8 @@
+templates:
+  - templates/benchmark-report.md
+  - templates/incident-review.md
+  - templates/release-readiness.md
+generated:
+  weekly: generated/weekly
+  monthly: generated/monthly
+  release: generated/release

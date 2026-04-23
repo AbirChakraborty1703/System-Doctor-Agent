@@ -1,0 +1,8 @@
+suite_id: cross_os_regression
+scenarios:
+  - windows
+  - macos
+  - linux
+metrics:
+  - top3_diagnosis_accuracy
+  - remediation_quality

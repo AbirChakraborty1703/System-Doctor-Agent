@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TraceRecord",
+  "type": "object",
+  "required": ["trace_id", "session_id", "agent_id", "timestamp"],
+  "properties": {
+    "trace_id": {"type": "string"},
+    "session_id": {"type": "string"},
+    "agent_id": {"type": "string"},
+    "timestamp": {"type": "string"}
+  }
+}

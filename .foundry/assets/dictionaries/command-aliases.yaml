@@ -1,0 +1,5 @@
+aliases:
+  windows:
+    sfc_scan: sfc /scannow
+  linux:
+    journal_tail: journalctl -xe

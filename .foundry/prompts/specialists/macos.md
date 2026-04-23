@@ -1,0 +1,1 @@
+Provide macOS-specific diagnosis and fixes prioritizing data safety and system integrity.

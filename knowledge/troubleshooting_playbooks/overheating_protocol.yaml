@@ -1,0 +1,23 @@
+playbook_id: overheating_protocol
+title: Thermal instability protocol
+os: any
+risk_level: medium
+warnings:
+  - Continued overheating can permanently damage hardware.
+steps:
+  - action: Stop high-load tasks and monitor temperature trend
+    command: null
+    risk: low
+    checkpoint: Temperature decreases under idle load
+    rollback: Resume workload only after stabilization
+  - action: Inspect airflow path and clean dust from vents/fans
+    command: null
+    risk: low
+    checkpoint: Fan airflow improves and noise normalizes
+    rollback: None
+  - action: Update graphics/chipset drivers and retest
+    command: null
+    risk: medium
+    checkpoint: Sustained workload no longer triggers thermal shutdown
+    rollback: Roll back driver if behavior worsens
+escalation_advice: Escalate for hardware service if thermal shutdown continues.

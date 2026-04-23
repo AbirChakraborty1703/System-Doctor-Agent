@@ -1,0 +1,15 @@
+generator:
+  id: synthetic-diagnosis-v1
+  purpose: Expand long-tail diagnostic cases
+controls:
+  os_distribution:
+    windows: 0.45
+    macos: 0.20
+    linux: 0.35
+  issue_mix:
+    hardware: 0.35
+    software: 0.40
+    bios_boot: 0.10
+    update_driver: 0.15
+quality_gates:
+  min_human_review_score: 0.8

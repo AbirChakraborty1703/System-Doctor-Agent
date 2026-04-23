@@ -1,0 +1,1 @@
+Determine whether the issue is resolved. If unresolved, request additional evidence or escalate.

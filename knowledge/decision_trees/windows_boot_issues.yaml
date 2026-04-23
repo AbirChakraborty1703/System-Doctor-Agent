@@ -1,0 +1,15 @@
+tree_id: windows_boot_issues_v1
+root:
+  id: boot_001
+  question: Do you see the manufacturer logo before restart?
+  yes: boot_002
+  no: boot_003
+nodes:
+  boot_002:
+    question: Did this start after a recent update or driver change?
+    yes: diagnosis_windows_driver_regression
+    no: diagnosis_windows_boot_loop_firmware
+  boot_003:
+    question: Do you hear beep codes or see motherboard LED error patterns?
+    yes: diagnosis_no_display_gpu_or_ram_fault
+    no: diagnosis_windows_boot_loop_firmware

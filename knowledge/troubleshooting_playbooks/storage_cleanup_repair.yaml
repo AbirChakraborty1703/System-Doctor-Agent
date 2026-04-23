@@ -1,0 +1,23 @@
+playbook_id: storage_cleanup_repair
+title: Storage capacity and health recovery
+os: any
+risk_level: medium
+warnings:
+  - Avoid deleting unknown system files.
+steps:
+  - action: Check free space and identify largest safe-to-remove files
+    command: null
+    risk: low
+    checkpoint: Free space target reached
+    rollback: Restore removed files from recycle bin/backup
+  - action: Verify file system health and basic disk integrity
+    command: null
+    risk: medium
+    checkpoint: Integrity checks complete without fatal errors
+    rollback: Run vendor recovery tools if integrity worsens
+  - action: Move archival data off primary system disk
+    command: null
+    risk: low
+    checkpoint: Sustained free space remains above threshold
+    rollback: Move archives back if migration fails
+escalation_advice: Escalate for disk replacement if recurring I/O errors appear.

@@ -1,0 +1,11 @@
+tree_id: performance_flow_v1
+root:
+  id: perf_001
+  question: Is CPU or memory usage consistently high when issue occurs?
+  yes: diagnosis_windows_performance_background_tasks
+  no: perf_002
+nodes:
+  perf_002:
+    question: Is storage above 90 percent used or showing I/O delays?
+    yes: diagnosis_storage_capacity_or_disk_health_issue
+    no: diagnosis_windows_driver_regression

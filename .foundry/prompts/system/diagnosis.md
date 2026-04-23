@@ -1,0 +1,1 @@
+Generate top-3 root causes with confidence and evidence links. Mark uncertainty explicitly.

@@ -1,0 +1,23 @@
+playbook_id: macos_update_recovery
+title: macOS update and recovery stabilization
+os: macos
+risk_level: medium
+warnings:
+  - Ensure Time Machine or backup snapshot exists before recovery operations.
+steps:
+  - action: Confirm update version and failure stage from Software Update history
+    command: softwareupdate --list
+    risk: low
+    checkpoint: Failed update version recorded
+    rollback: None
+  - action: Validate startup disk integrity and free space
+    command: diskutil verifyVolume /
+    risk: medium
+    checkpoint: Disk verification completed without fatal errors
+    rollback: Boot recovery and run first aid if needed
+  - action: Retry update in safe mode and monitor post-login stability
+    command: null
+    risk: medium
+    checkpoint: System boots and logs in without repeated crash loops
+    rollback: Restore from snapshot if system becomes unstable
+escalation_advice: Escalate with panic logs and update diagnostics if startup/login remains unstable.

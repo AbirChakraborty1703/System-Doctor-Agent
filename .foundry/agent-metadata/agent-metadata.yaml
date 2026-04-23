@@ -1,0 +1,28 @@
+schema_version: 1
+defaultEnvironment: dev
+environments:
+  dev:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_DEV}
+    agentName: systemdoctor-orchestrator-dev
+  staging:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_STAGING}
+    agentName: systemdoctor-orchestrator-staging
+  prod:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_PROD}
+    agentName: systemdoctor-orchestrator-prod
+agents:
+  core:
+    - orchestrator
+    - triage
+    - question_engine
+    - diagnosis_engine
+    - remediation_engine
+    - verification
+  specialists:
+    - hardware
+    - software
+    - windows
+    - macos
+    - linux
+    - bios_boot
+    - update_driver

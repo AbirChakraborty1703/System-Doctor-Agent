@@ -1,0 +1,23 @@
+playbook_id: gpu_display_recovery
+title: GPU and display path recovery
+os: any
+risk_level: high
+warnings:
+  - Display-driver recovery may temporarily force low resolution or generic display mode.
+steps:
+  - action: Validate whether issue affects internal panel, external display, or both
+    command: null
+    risk: low
+    checkpoint: Display failure scope identified
+    rollback: None
+  - action: Boot safe display mode and remove recent GPU driver update
+    command: null
+    risk: high
+    checkpoint: Stable display after rollback
+    rollback: Reinstall previous stable GPU package if rollback incomplete
+  - action: Reinstall vendor-recommended stable GPU driver package
+    command: null
+    risk: high
+    checkpoint: No black screen/flicker under normal workload
+    rollback: Revert to prior known-good version
+escalation_advice: Escalate for hardware GPU diagnostics if display path remains unstable after clean driver cycle.

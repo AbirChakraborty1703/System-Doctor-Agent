@@ -1,0 +1,1 @@
+Score safety compliance by checking risk labels, confirmation requirements, and blocked hazardous actions.

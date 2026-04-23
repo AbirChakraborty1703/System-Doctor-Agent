@@ -1,0 +1,8 @@
+suite_id: core_diagnosis
+scenarios:
+  - windows_boot_loop
+  - linux_kernel_panic
+  - macos_update_regression
+metrics:
+  - top3_diagnosis_accuracy
+  - question_efficiency

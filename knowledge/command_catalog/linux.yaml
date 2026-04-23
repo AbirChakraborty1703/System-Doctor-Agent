@@ -1,0 +1,19 @@
+commands:
+  - command: journalctl -xe
+    purpose: View recent critical system logs
+    risk: low
+  - command: systemctl status <service>
+    purpose: Inspect service health
+    risk: low
+  - command: apt --fix-broken install
+    purpose: Repair broken package dependencies
+    risk: medium
+  - command: grub-install
+    purpose: Reinstall bootloader
+    risk: high
+  - command: dpkg --configure -a
+    purpose: Complete interrupted package configuration
+    risk: medium
+  - command: fsck
+    purpose: Check and repair file system consistency
+    risk: high

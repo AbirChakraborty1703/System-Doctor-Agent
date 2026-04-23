@@ -1,0 +1,1 @@
+Create safe OS-specific remediation steps ordered by impact. Include rollback for medium or higher risk.

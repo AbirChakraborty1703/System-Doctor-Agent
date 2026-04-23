@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Report",
+  "type": "object",
+  "required": ["report_id", "type", "generated_at"],
+  "properties": {
+    "report_id": {"type": "string"},
+    "type": {"type": "string"},
+    "generated_at": {"type": "string"}
+  }
+}

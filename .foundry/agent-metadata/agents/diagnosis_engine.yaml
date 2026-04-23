@@ -1,0 +1,10 @@
+id: diagnosis_engine
+type: core
+owner: diagnostic-intelligence
+responsibility: Rank probable root causes with confidence
+inputs:
+  - evidence_bundle
+  - specialist_signals
+outputs:
+  - diagnosis_ranking
+  - confidence_scores

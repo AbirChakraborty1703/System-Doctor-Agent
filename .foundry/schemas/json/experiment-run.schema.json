@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentRun",
+  "type": "object",
+  "required": ["run_id", "experiment_id", "started_at", "status"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "experiment_id": {"type": "string"},
+    "started_at": {"type": "string"},
+    "status": {"type": "string"}
+  }
+}

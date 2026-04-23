@@ -1,0 +1,23 @@
+playbook_id: windows_boot_recovery
+title: Windows boot recovery workflow
+os: windows
+risk_level: high
+warnings:
+  - Boot repair can affect startup configuration; ensure backup and recovery media availability.
+steps:
+  - action: Confirm boot order and UEFI/legacy mode consistency
+    command: bcdedit /enum
+    risk: high
+    checkpoint: Boot configuration reviewed
+    rollback: Restore previous BIOS boot mode if changed
+  - action: Repair system image corruption
+    command: DISM /Online /Cleanup-Image /RestoreHealth
+    risk: medium
+    checkpoint: DISM reports operation completed successfully
+    rollback: Reboot and use restore point if boot worsens
+  - action: Repair protected system files
+    command: sfc /scannow
+    risk: medium
+    checkpoint: SFC reaches 100 percent and reports status
+    rollback: Reboot into recovery and run startup repair
+escalation_advice: If startup still fails, escalate for hardware diagnostics and advanced recovery.

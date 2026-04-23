@@ -1,0 +1,16 @@
+commands:
+  - command: softwareupdate --list
+    purpose: Show available macOS updates
+    risk: low
+  - command: log show --predicate 'process == "kernel"' --last 1h
+    purpose: Inspect recent kernel events
+    risk: medium
+  - command: diskutil verifyVolume /
+    purpose: Verify startup disk file system
+    risk: medium
+  - command: fsck_apfs -n /
+    purpose: Non-destructive APFS consistency check
+    risk: medium
+  - command: nvram -p
+    purpose: Inspect NVRAM values for diagnostics
+    risk: high

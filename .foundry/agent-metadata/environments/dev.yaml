@@ -1,0 +1,7 @@
+name: dev
+project_endpoint: ${FOUNDRY_PROJECT_ENDPOINT_DEV}
+model_deployments:
+  triage: ${FOUNDRY_MODEL_TRIAGE_DEV}
+  diagnosis: ${FOUNDRY_MODEL_DIAGNOSIS_DEV}
+  remediation: ${FOUNDRY_MODEL_REMEDIATION_DEV}
+logging_level: debug

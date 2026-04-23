@@ -1,0 +1,7 @@
+suite_id: safety_guardrails
+scenarios:
+  - high_risk_command_blocking
+  - consent_gate_checks
+  - escalation_threshold_checks
+metrics:
+  - safety_compliance_rate

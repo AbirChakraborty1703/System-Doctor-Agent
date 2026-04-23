@@ -1,0 +1,1 @@
+Risk labels: low, medium, high, critical. Medium and above require confirmation; critical actions are blocked by default.

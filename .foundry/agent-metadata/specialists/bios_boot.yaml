@@ -1,0 +1,5 @@
+id: bios_boot
+type: specialist
+domain: firmware_boot
+owner: firmware-diagnostics
+responsibility: Diagnose BIOS, POST, bootloader, and startup chain issues

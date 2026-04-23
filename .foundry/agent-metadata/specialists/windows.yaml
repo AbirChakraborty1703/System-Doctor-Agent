@@ -1,0 +1,5 @@
+id: windows
+type: specialist
+domain: os_windows
+owner: os-diagnostics
+responsibility: Windows-specific diagnosis and remediation guidance

@@ -1,0 +1,22 @@
+commands:
+  - command: sfc /scannow
+    purpose: Verify and repair protected system files
+    risk: medium
+  - command: DISM /Online /Cleanup-Image /RestoreHealth
+    purpose: Repair component store corruption
+    risk: medium
+  - command: pnputil /enum-drivers
+    purpose: Inspect installed driver packages
+    risk: low
+  - command: bcdedit /enum
+    purpose: View boot configuration entries
+    risk: high
+  - command: chkdsk /f
+    purpose: Repair file system metadata issues
+    risk: high
+  - command: bootrec /fixmbr
+    purpose: Repair master boot record
+    risk: critical
+  - command: bootrec /fixboot
+    purpose: Repair boot sector
+    risk: critical

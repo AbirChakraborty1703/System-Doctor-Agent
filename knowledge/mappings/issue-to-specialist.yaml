@@ -1,0 +1,8 @@
+mapping:
+  hardware: hardware
+  software: software
+  windows: windows
+  macos: macos
+  linux: linux
+  bios_boot: bios_boot
+  update_driver: update_driver

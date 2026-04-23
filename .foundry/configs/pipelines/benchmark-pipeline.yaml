@@ -1,0 +1,8 @@
+pipeline:
+  id: benchmark
+  schedule: nightly
+  steps:
+    - load_benchmark_suite
+    - execute_agent_runs
+    - score_outputs
+    - write_report

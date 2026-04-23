@@ -1,0 +1,23 @@
+playbook_id: wifi_recovery
+title: Wi-Fi recovery workflow
+os: any
+risk_level: low
+warnings:
+  - Network reset may remove saved adapter preferences.
+steps:
+  - action: Confirm issue scope across multiple networks and devices
+    command: null
+    risk: low
+    checkpoint: Scope isolated to local host or network
+    rollback: None
+  - action: Restart adapter stack and clear stale network profile
+    command: null
+    risk: low
+    checkpoint: Adapter reconnects and receives valid IP
+    rollback: Re-add saved profile if removed
+  - action: Reinstall or update network adapter driver/package
+    command: null
+    risk: medium
+    checkpoint: Stable connectivity for at least 15 minutes
+    rollback: Reinstall previously stable adapter package
+escalation_advice: Escalate with adapter logs if intermittent drops persist.

@@ -1,0 +1,23 @@
+playbook_id: macos_app_crash_repair
+title: macOS app crash repair workflow
+os: macos
+risk_level: medium
+warnings:
+  - Removing app extensions may change app behavior.
+steps:
+  - action: Launch app in Safe Mode context and test reproducibility
+    command: null
+    risk: low
+    checkpoint: Crash pattern confirmed or reduced
+    rollback: Exit Safe Mode
+  - action: Check recent kernel/app logs for repeated crash signature
+    command: log show --predicate 'process == "kernel"' --last 1h
+    risk: medium
+    checkpoint: Relevant crash signature extracted
+    rollback: None
+  - action: Disable suspect extension/plugin and reinstall app if required
+    command: null
+    risk: medium
+    checkpoint: App remains stable for normal workload
+    rollback: Re-enable extension if not causal
+escalation_advice: Escalate with crash logs if issue persists across clean profile.

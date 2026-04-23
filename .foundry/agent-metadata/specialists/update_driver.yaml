@@ -1,0 +1,5 @@
+id: update_driver
+type: specialist
+domain: updates_drivers
+owner: update-diagnostics
+responsibility: Diagnose update regressions and driver compatibility issues

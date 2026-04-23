@@ -1,0 +1,7 @@
+retrieval:
+  provider: chroma
+  top_k: 6
+  rerank: true
+sources:
+  - knowledge/decision_trees
+  - knowledge/troubleshooting_playbooks

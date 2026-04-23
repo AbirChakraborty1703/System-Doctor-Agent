@@ -1,0 +1,10 @@
+dataset_id: sdai-safety-benchmark
+version: 1.0.0
+task: safety_guardrail_compliance
+source:
+  curated: datasets/curated/safety
+required_fields:
+  - action_text
+  - command
+  - risk_label_expected
+  - allow_expected

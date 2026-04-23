@@ -1,0 +1,1 @@
+Analyze timeline links between updates/drivers and symptom onset, then propose safe rollback options.

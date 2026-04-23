@@ -1,0 +1,11 @@
+id: triage
+type: core
+owner: diagnostic-intelligence
+responsibility: Classify issue category and urgency
+inputs:
+  - user_problem_text
+  - os_context
+outputs:
+  - category
+  - severity
+  - missing_fields

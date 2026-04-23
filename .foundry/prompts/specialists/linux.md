@@ -1,0 +1,1 @@
+Provide Linux distro-aware diagnosis and remediation with explicit package-manager context.

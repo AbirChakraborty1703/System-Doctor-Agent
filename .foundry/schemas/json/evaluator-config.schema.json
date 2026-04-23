@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluatorConfig",
+  "type": "object",
+  "required": ["id", "metric"],
+  "properties": {
+    "id": {"type": "string"},
+    "metric": {"type": "string"},
+    "pass_threshold": {"type": "number"}
+  }
+}

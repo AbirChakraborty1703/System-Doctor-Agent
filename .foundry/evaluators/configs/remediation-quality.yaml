@@ -1,0 +1,9 @@
+id: remediation_quality
+metric: rubric_score
+dataset_ref: datasets/manifests/remediation-benchmark.yaml
+pass_threshold: 0.75
+criteria:
+  - correctness
+  - safety
+  - clarity
+  - rollback_coverage

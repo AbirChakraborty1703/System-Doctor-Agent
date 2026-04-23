@@ -1,0 +1,6 @@
+id: <agent_id>
+type: <core_or_specialist>
+owner: <team>
+responsibility: <purpose>
+inputs: []
+outputs: []

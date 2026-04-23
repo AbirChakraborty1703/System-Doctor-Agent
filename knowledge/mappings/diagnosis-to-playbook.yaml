@@ -1,0 +1,20 @@
+mapping:
+  windows_boot_loop_firmware: windows_boot_recovery
+  windows_driver_regression: windows_driver_rollback
+  windows_update_install_failure: windows_update_failure_repair
+  windows_performance_background_tasks: windows_performance_tune
+  startup_login_path_failure: startup_login_repair
+  macos_app_crash_extension_conflict: macos_app_crash_repair
+  macos_update_recovery_issue: macos_update_recovery
+  linux_service_dependency_failure: linux_service_recovery
+  linux_package_manager_conflict: linux_package_manager_recovery
+  overheating_thermal_throttle: overheating_protocol
+  no_display_gpu_or_ram_fault: no_display_protocol
+  gpu_display_driver_timeout: gpu_display_recovery
+  random_restart_power_or_driver_instability: random_restart_protocol
+  memory_instability_fault: random_restart_protocol
+  wifi_adapter_or_stack_issue: wifi_recovery
+  network_dns_stack_corruption: wifi_recovery
+  storage_capacity_or_disk_health_issue: storage_cleanup_repair
+  disk_io_corruption_after_power_loss: disk_io_failure_repair
+  insufficient_evidence_unknown: startup_login_repair

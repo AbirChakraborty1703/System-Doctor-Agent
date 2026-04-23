@@ -1,0 +1,23 @@
+playbook_id: windows_performance_tune
+title: Windows performance tuning workflow
+os: windows
+risk_level: medium
+warnings:
+  - Disabling startup apps can affect background integrations.
+steps:
+  - action: Review CPU and memory heavy startup processes
+    command: null
+    risk: low
+    checkpoint: Top resource offenders identified
+    rollback: Re-enable disabled startup apps if needed
+  - action: Disable non-essential startup apps and services
+    command: null
+    risk: medium
+    checkpoint: Startup time improved after restart
+    rollback: Restore previously disabled entries
+  - action: Verify system file health
+    command: sfc /scannow
+    risk: medium
+    checkpoint: SFC completed without unrepaired corruption
+    rollback: Use DISM and restore point if needed
+escalation_advice: If slowness remains severe, run storage and memory diagnostics.

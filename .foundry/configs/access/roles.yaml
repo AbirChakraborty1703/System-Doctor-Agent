@@ -1,0 +1,13 @@
+roles:
+  - name: foundry_admin
+    permissions:
+      - read_write_all
+  - name: evaluator
+    permissions:
+      - read_datasets
+      - run_evaluators
+      - read_results
+  - name: reporter
+    permissions:
+      - read_results
+      - write_reports

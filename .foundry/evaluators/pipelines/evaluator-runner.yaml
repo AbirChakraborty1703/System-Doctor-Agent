@@ -1,0 +1,8 @@
+pipeline:
+  id: evaluator_runner
+  steps:
+    - load_dataset_index
+    - validate_schema
+    - run_evaluators
+    - aggregate_metrics
+    - publish_results

@@ -1,0 +1,4 @@
+id: question_efficiency
+metric: avg_questions_to_confidence
+target_max_questions: 6
+dataset_ref: datasets/manifests/diagnosis-benchmark.yaml

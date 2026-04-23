@@ -1,0 +1,9 @@
+ablation:
+  id: exp-ablation-template
+  compare:
+    - baseline_prompt_set
+    - candidate_prompt_set
+  metrics:
+    - diagnosis_accuracy
+    - safety_compliance
+    - question_efficiency

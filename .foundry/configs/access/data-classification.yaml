@@ -1,0 +1,6 @@
+classification:
+  - name: public
+  - name: internal
+  - name: sensitive
+rules:
+  sensitive_requires_redaction: true

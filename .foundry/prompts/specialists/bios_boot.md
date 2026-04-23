@@ -1,0 +1,1 @@
+Handle BIOS, boot, and firmware chain failures with strict safety and confirmation gates.

@@ -1,0 +1,23 @@
+playbook_id: linux_package_manager_recovery
+title: Linux package manager conflict recovery
+os: linux
+risk_level: medium
+warnings:
+  - Package repair can replace pinned dependencies.
+steps:
+  - action: Identify failing package transaction and held packages
+    command: null
+    risk: low
+    checkpoint: Broken package set isolated
+    rollback: None
+  - action: Repair dependency graph and incomplete package state
+    command: apt --fix-broken install
+    risk: medium
+    checkpoint: Dependency resolver exits cleanly
+    rollback: Reinstall previously pinned versions if mismatch appears
+  - action: Reconfigure pending packages and restart affected service
+    command: null
+    risk: medium
+    checkpoint: Service starts without dependency error
+    rollback: Restore previous package versions from cache if needed
+escalation_advice: Escalate with package logs and unit status output when resolver loops persist.

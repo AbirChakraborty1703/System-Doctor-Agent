@@ -1,0 +1,28 @@
+playbook_id: windows_update_failure_repair
+title: Windows update failure recovery workflow
+os: windows
+risk_level: high
+warnings:
+  - Avoid repeated forced power-off during update rollback.
+steps:
+  - action: Capture exact update error code and failed KB identifier
+    command: null
+    risk: low
+    checkpoint: Error code and KB ID recorded
+    rollback: None
+  - action: Run servicing stack and component repair checks
+    command: DISM /Online /Cleanup-Image /RestoreHealth
+    risk: medium
+    checkpoint: DISM reports completed successfully
+    rollback: Use restore point if system behavior worsens
+  - action: Validate system files before retrying update
+    command: sfc /scannow
+    risk: medium
+    checkpoint: SFC completed with no unrepaired corruption
+    rollback: Boot recovery mode and run startup repair if needed
+  - action: Retry update in clean boot or safe startup conditions
+    command: null
+    risk: high
+    checkpoint: Update passes install and restart stages
+    rollback: Uninstall failed update package if recurring failure
+escalation_advice: Escalate with CBS logs and Windows Update logs if installation remains blocked.

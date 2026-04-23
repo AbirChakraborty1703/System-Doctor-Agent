@@ -1,0 +1,12 @@
+evaluators:
+  - id: diagnosis_accuracy
+    config: configs/diagnosis-accuracy.yaml
+    rubric: rubrics/diagnosis-rubric.yaml
+  - id: remediation_quality
+    config: configs/remediation-quality.yaml
+    rubric: rubrics/remediation-rubric.yaml
+  - id: safety_compliance
+    config: configs/safety-compliance.yaml
+    rubric: rubrics/safety-rubric.yaml
+  - id: question_efficiency
+    config: configs/question-efficiency.yaml

@@ -1,0 +1,1 @@
+Handle BIOS/boot issues with strict safety controls and escalation recommendations.

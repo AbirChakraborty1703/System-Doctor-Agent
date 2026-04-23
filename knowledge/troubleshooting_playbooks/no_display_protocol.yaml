@@ -1,0 +1,23 @@
+playbook_id: no_display_protocol
+title: No display startup protocol
+os: any
+risk_level: high
+warnings:
+  - Hardware reseating should be performed only when device is powered off and unplugged.
+steps:
+  - action: Check monitor cable, display input source, and power path
+    command: null
+    risk: low
+    checkpoint: External display path validated
+    rollback: None
+  - action: Reset firmware display defaults and test integrated graphics path
+    command: null
+    risk: high
+    checkpoint: POST/BIOS display appears
+    rollback: Restore previous firmware settings if needed
+  - action: Reseat RAM or test alternate memory slot if accessible
+    command: null
+    risk: high
+    checkpoint: Stable display output after memory check
+    rollback: Reinstall original module configuration
+escalation_advice: Escalate to hardware service if no display persists.

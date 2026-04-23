@@ -1,0 +1,7 @@
+experiments:
+  - id: exp-diagnosis-v1
+    objective: Improve top-3 diagnosis accuracy
+    owner: diagnostic-intelligence
+  - id: exp-remediation-v1
+    objective: Improve remediation quality and safety
+    owner: remediation-platform

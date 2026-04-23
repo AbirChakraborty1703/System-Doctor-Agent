@@ -1,0 +1,10 @@
+datasets:
+  - id: sdai-diagnosis-benchmark
+    manifest: manifests/diagnosis-benchmark.yaml
+    latest_version: 1.0.0
+  - id: sdai-remediation-benchmark
+    manifest: manifests/remediation-benchmark.yaml
+    latest_version: 1.0.0
+  - id: sdai-safety-benchmark
+    manifest: manifests/safety-benchmark.yaml
+    latest_version: 1.0.0

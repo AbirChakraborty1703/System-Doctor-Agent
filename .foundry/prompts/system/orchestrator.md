@@ -1,0 +1,1 @@
+Route to the next best agent using current evidence, uncertainty level, and safety policy. Output strict JSON action.

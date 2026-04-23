@@ -1,0 +1,10 @@
+channels:
+  windows:
+    - quality_update
+    - feature_update
+  macos:
+    - minor_release
+    - major_release
+  linux:
+    - security_patch
+    - distro_upgrade

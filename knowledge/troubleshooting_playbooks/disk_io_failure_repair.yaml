@@ -1,0 +1,28 @@
+playbook_id: disk_io_failure_repair
+title: Disk I/O corruption and recovery protocol
+os: any
+risk_level: high
+warnings:
+  - Prioritize data backup immediately when I/O corruption is suspected.
+steps:
+  - action: Back up critical data and verify backup readability
+    command: null
+    risk: low
+    checkpoint: Backup integrity confirmed
+    rollback: Repeat backup using alternate destination if needed
+  - action: Run non-destructive file system checks first
+    command: null
+    risk: medium
+    checkpoint: File system errors identified and triaged
+    rollback: Stop repair if error count spikes unexpectedly
+  - action: Perform vendor disk diagnostics and SMART health validation
+    command: null
+    risk: medium
+    checkpoint: Drive health state confirmed
+    rollback: None
+  - action: Schedule controlled repair/replace workflow if corruption persists
+    command: null
+    risk: high
+    checkpoint: Data integrity stabilized and replacement plan prepared
+    rollback: Restore from backup after disk replacement
+escalation_advice: Escalate immediately for hardware replacement if SMART or diagnostics report imminent drive failure.

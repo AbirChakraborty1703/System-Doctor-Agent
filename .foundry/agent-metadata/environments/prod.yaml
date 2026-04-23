@@ -1,0 +1,7 @@
+name: prod
+project_endpoint: ${FOUNDRY_PROJECT_ENDPOINT_PROD}
+model_deployments:
+  triage: ${FOUNDRY_MODEL_TRIAGE_PROD}
+  diagnosis: ${FOUNDRY_MODEL_DIAGNOSIS_PROD}
+  remediation: ${FOUNDRY_MODEL_REMEDIATION_PROD}
+logging_level: warning

@@ -1,0 +1,46 @@
+mapping:
+  random_restart_after_update:
+    - windows_driver_regression
+    - random_restart_power_or_driver_instability
+    - windows_update_install_failure
+  no_boot_logo:
+    - windows_boot_loop_firmware
+    - no_display_gpu_or_ram_fault
+    - startup_login_path_failure
+  windows_slow_after_startup:
+    - windows_performance_background_tasks
+    - storage_capacity_or_disk_health_issue
+  macos_app_crash_after_update:
+    - macos_app_crash_extension_conflict
+    - macos_update_recovery_issue
+  linux_service_failed_dependency:
+    - linux_service_dependency_failure
+    - linux_package_manager_conflict
+  overheating_under_load:
+    - overheating_thermal_throttle
+    - random_restart_power_or_driver_instability
+  no_display_signal:
+    - no_display_gpu_or_ram_fault
+    - gpu_display_driver_timeout
+  wifi_drops_or_no_internet:
+    - wifi_adapter_or_stack_issue
+    - network_dns_stack_corruption
+  disk_full_or_io_errors:
+    - storage_capacity_or_disk_health_issue
+    - disk_io_corruption_after_power_loss
+  windows_update_error_code:
+    - windows_update_install_failure
+    - windows_driver_regression
+  login_stuck_after_update:
+    - startup_login_path_failure
+    - windows_update_install_failure
+    - macos_update_recovery_issue
+  linux_package_update_failed:
+    - linux_package_manager_conflict
+    - linux_service_dependency_failure
+  black_screen_after_driver_update:
+    - gpu_display_driver_timeout
+    - windows_driver_regression
+  ram_beep_or_boot_instability:
+    - memory_instability_fault
+    - no_display_gpu_or_ram_fault

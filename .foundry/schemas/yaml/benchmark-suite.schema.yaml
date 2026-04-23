@@ -1,0 +1,11 @@
+type: object
+required:
+  - suite_id
+  - scenarios
+properties:
+  suite_id:
+    type: string
+  scenarios:
+    type: array
+    items:
+      type: string

@@ -1,0 +1,13 @@
+tags:
+  environment:
+    - dev
+    - staging
+    - prod
+  release_stage:
+    - prototype
+    - candidate
+    - production
+  evaluation_type:
+    - benchmark
+    - regression
+    - smoke

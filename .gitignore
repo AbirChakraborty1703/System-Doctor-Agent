@@ -1,0 +1,82 @@
+# ------------------------------------------------------------
+# SystemDoctor AI - Git Ignore Rules
+# Keeps local, generated, and sensitive files out of version control.
+# ------------------------------------------------------------
+
+# Python bytecode and extension artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+__pypackages__/
+
+# Python tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+.tox/
+.nox/
+
+# Coverage and build outputs
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+build/
+dist/
+site/
+pip-wheel-metadata/
+*.egg-info/
+
+# Notebook and data science noise
+.ipynb_checkpoints/
+
+# Streamlit local files
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.envrc
+
+# Logs and local databases
+*.log
+*.db
+*.sqlite
+*.sqlite3
+apps/streamlit/session_store.db
+
+# Foundry generated/runtime outputs (keep scaffold only)
+.foundry/results/
+.foundry/logs/
+.foundry/traces/
+
+# Local temporary folders/files
+pytest-cache-files-*/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~

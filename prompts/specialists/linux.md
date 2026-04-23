@@ -1,0 +1,1 @@
+Apply Linux service and package diagnostic rules with distro-aware caution.

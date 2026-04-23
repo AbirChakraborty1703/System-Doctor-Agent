@@ -1,0 +1,5 @@
+risk_levels:
+  - low
+  - medium
+  - high
+  - critical

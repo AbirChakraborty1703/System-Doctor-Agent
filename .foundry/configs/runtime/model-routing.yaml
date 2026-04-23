@@ -1,0 +1,8 @@
+routing:
+  triage: fast-model
+  question_engine: fast-model
+  diagnosis_engine: reasoning-model
+  remediation_engine: reasoning-model
+fallback_order:
+  - fast-model
+  - reasoning-model

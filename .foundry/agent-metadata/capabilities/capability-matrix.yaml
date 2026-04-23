@@ -1,0 +1,19 @@
+capabilities:
+  - id: adaptive_questioning
+    owner_agent: question_engine
+  - id: diagnosis_ranking
+    owner_agent: diagnosis_engine
+  - id: remediation_generation
+    owner_agent: remediation_engine
+  - id: resolution_verification
+    owner_agent: verification
+  - id: hardware_diagnostics
+    owner_agent: hardware
+  - id: software_diagnostics
+    owner_agent: software
+  - id: os_specific_guidance
+    owner_agent: windows
+  - id: firmware_boot_diagnostics
+    owner_agent: bios_boot
+  - id: update_driver_regression_detection
+    owner_agent: update_driver

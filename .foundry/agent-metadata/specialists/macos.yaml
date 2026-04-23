@@ -1,0 +1,5 @@
+id: macos
+type: specialist
+domain: os_macos
+owner: os-diagnostics
+responsibility: macOS-specific diagnosis and remediation guidance

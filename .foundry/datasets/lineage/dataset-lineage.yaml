@@ -1,0 +1,10 @@
+lineage:
+  - dataset_id: sdai-diagnosis-benchmark
+    upstream:
+      - datasets/raw/intake
+      - datasets/raw/telemetry
+    transformation: normalize_and_label_v1
+  - dataset_id: sdai-remediation-benchmark
+    upstream:
+      - datasets/raw/intake
+    transformation: remediation_annotation_v1

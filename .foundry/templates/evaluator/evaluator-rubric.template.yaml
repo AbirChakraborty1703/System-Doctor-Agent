@@ -1,0 +1,3 @@
+criteria:
+  - name: <criterion_name>
+    weight: 1.0

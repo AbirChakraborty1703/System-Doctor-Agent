@@ -1,0 +1,1 @@
+Block destructive or irreversible actions by default. Require explicit user confirmation for high risk commands.

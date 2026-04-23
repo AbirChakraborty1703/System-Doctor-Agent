@@ -1,0 +1,10 @@
+risk_policy:
+  low:
+    requires_confirmation: false
+  medium:
+    requires_confirmation: true
+  high:
+    requires_confirmation: true
+    requires_double_confirmation: true
+  critical:
+    blocked_by_default: true

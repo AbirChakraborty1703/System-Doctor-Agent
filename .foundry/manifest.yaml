@@ -1,0 +1,24 @@
+schema_version: 1
+project:
+  id: systemdoctor-ai
+  name: SystemDoctor AI
+  description: Multi-agent diagnostic copilot for cross-OS hardware and software troubleshooting
+workspace:
+  default_environment: dev
+  owner_team: ai-platform
+  created_on: 2026-04-22
+directories:
+  - agent-metadata
+  - datasets
+  - evaluators
+  - experiments
+  - prompts
+  - results
+  - traces
+  - reports
+  - configs
+  - schemas
+  - logs
+  - benchmarks
+  - assets
+  - templates

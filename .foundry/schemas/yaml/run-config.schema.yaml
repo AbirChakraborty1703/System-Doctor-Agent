@@ -1,0 +1,14 @@
+type: object
+required:
+  - run_id
+  - environment
+  - evaluator_bundle
+properties:
+  run_id:
+    type: string
+  environment:
+    type: string
+  evaluator_bundle:
+    type: array
+    items:
+      type: string

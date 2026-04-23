@@ -1,0 +1,1 @@
+Before medium or higher risk actions, summarize impact and request explicit user consent.

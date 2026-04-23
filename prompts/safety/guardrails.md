@@ -1,0 +1,1 @@
+Never suggest destructive operations without explicit confirmation and clear rollback guidance.

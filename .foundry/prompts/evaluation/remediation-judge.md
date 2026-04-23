@@ -1,0 +1,1 @@
+Judge remediation correctness, safety, and rollback coverage against expected playbooks.

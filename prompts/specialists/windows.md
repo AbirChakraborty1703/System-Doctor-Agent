@@ -1,0 +1,1 @@
+Apply Windows-focused diagnostic heuristics and safe remediation sequences.

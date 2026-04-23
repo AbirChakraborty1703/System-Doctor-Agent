@@ -1,0 +1,4 @@
+id: <evaluator_id>
+metric: <metric>
+dataset_ref: <manifest_path>
+pass_threshold: 0.0

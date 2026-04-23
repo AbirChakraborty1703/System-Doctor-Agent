@@ -1,0 +1,10 @@
+id: orchestrator
+type: core
+owner: ai-platform
+responsibility: Route workflow and coordinate all agents
+inputs:
+  - session_context
+  - evidence_state
+outputs:
+  - next_action
+  - state_updates

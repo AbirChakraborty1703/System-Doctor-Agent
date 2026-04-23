@@ -1,0 +1,10 @@
+id: verification
+type: core
+owner: remediation-platform
+responsibility: Confirm issue resolution and decide next loop action
+inputs:
+  - remediation_outcome
+  - user_feedback
+outputs:
+  - resolved
+  - escalation_recommendation

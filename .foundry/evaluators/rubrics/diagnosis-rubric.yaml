@@ -1,0 +1,7 @@
+criteria:
+  - name: root_cause_alignment
+    weight: 0.5
+  - name: evidence_justification
+    weight: 0.3
+  - name: confidence_calibration
+    weight: 0.2

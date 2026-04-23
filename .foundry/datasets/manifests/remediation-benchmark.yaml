@@ -1,0 +1,10 @@
+dataset_id: sdai-remediation-benchmark
+version: 1.0.0
+task: remediation_plan_quality
+source:
+  curated: datasets/curated/remediation
+required_fields:
+  - diagnosis
+  - os
+  - expected_fix_steps
+  - safety_constraints

@@ -1,0 +1,23 @@
+playbook_id: random_restart_protocol
+title: Random restart stability protocol
+os: any
+risk_level: medium
+warnings:
+  - Sudden restarts may indicate hardware power instability.
+steps:
+  - action: Correlate restart events with load, temperature, and update timeline
+    command: null
+    risk: low
+    checkpoint: Trigger pattern identified
+    rollback: None
+  - action: Revert recent driver or system update if strongly correlated
+    command: null
+    risk: medium
+    checkpoint: Restart frequency decreases after rollback
+    rollback: Reapply update if rollback has no effect
+  - action: Run power and memory diagnostics
+    command: null
+    risk: medium
+    checkpoint: No hardware fault reported
+    rollback: None
+escalation_advice: Escalate if restart continues despite rollback and diagnostics.

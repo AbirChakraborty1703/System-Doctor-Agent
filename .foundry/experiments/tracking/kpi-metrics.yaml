@@ -1,0 +1,7 @@
+kpis:
+  - id: top3_diagnosis_accuracy
+    target: 0.80
+  - id: safety_compliance_rate
+    target: 0.98
+  - id: avg_questions_to_confidence
+    target: 6

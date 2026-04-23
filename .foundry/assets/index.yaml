@@ -1,0 +1,7 @@
+assets:
+  - taxonomies/issue-taxonomy.yaml
+  - taxonomies/os-taxonomy.yaml
+  - taxonomies/risk-taxonomy.yaml
+  - mappings/symptom-to-diagnosis.yaml
+  - mappings/diagnosis-to-playbook.yaml
+  - mappings/issue-to-specialist.yaml

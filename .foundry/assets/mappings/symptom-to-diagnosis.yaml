@@ -1,0 +1,7 @@
+mapping:
+  random_restart_after_update:
+    - driver_regression
+    - thermal_instability
+  no_boot_logo:
+    - bios_configuration_issue
+    - motherboard_failure

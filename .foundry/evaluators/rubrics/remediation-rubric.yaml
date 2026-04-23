@@ -1,0 +1,9 @@
+criteria:
+  - name: action_correctness
+    weight: 0.35
+  - name: safety_compliance
+    weight: 0.35
+  - name: rollback_quality
+    weight: 0.20
+  - name: user_clarity
+    weight: 0.10

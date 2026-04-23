@@ -1,0 +1,1 @@
+Provide Windows-specific diagnosis and fixes with safe command guidance and rollback paths.

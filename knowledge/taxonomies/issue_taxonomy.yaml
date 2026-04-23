@@ -1,0 +1,9 @@
+issues:
+  - hardware
+  - software
+  - performance
+  - update_driver
+  - bios_boot
+  - storage
+  - network
+  - os_specific

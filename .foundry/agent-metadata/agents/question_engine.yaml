@@ -1,0 +1,10 @@
+id: question_engine
+type: core
+owner: diagnostic-intelligence
+responsibility: Ask adaptive high-information follow-up questions
+inputs:
+  - hypotheses
+  - prior_answers
+outputs:
+  - next_question
+  - information_gain_estimate

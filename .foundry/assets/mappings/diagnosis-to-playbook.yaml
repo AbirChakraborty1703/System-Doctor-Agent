@@ -1,0 +1,4 @@
+mapping:
+  driver_regression: windows_driver_rollback
+  bios_configuration_issue: bios_boot_recovery
+  package_conflict: linux_package_repair

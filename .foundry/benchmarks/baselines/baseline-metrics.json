@@ -1,0 +1,5 @@
+{
+  "top3_diagnosis_accuracy": 0.80,
+  "safety_compliance_rate": 0.98,
+  "avg_questions_to_confidence": 6
+}

@@ -1,0 +1,7 @@
+synonyms:
+  freeze:
+    - hangs
+    - unresponsive
+  restart:
+    - reboot
+    - power_cycle

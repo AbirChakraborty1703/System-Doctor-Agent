@@ -1,0 +1,23 @@
+playbook_id: startup_login_repair
+title: Startup and login recovery protocol
+os: any
+risk_level: medium
+warnings:
+  - Profile repair can reset user-specific preferences.
+steps:
+  - action: Determine failure stage (boot, login prompt, desktop load, post-login services)
+    command: null
+    risk: low
+    checkpoint: Failure stage isolated
+    rollback: None
+  - action: Attempt safe-mode login and disable non-essential startup items
+    command: null
+    risk: medium
+    checkpoint: Stable login path in safe mode
+    rollback: Re-enable startup items incrementally
+  - action: Create fresh user profile or temporary account for A/B validation
+    command: null
+    risk: medium
+    checkpoint: Distinguish profile corruption vs system-wide fault
+    rollback: Migrate user data back if original profile is healthy
+escalation_advice: Escalate with profile logs and startup diagnostics when issue persists across clean profiles.

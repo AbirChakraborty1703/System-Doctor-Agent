@@ -1,0 +1,11 @@
+tree_id: network_storage_flow_v1
+root:
+  id: ns_001
+  question: Is primary issue internet dropouts or inability to connect?
+  yes: diagnosis_wifi_adapter_or_stack_issue
+  no: ns_002
+nodes:
+  ns_002:
+    question: Is disk full or do file operations freeze?
+    yes: diagnosis_storage_capacity_or_disk_health_issue
+    no: diagnosis_linux_service_dependency_failure

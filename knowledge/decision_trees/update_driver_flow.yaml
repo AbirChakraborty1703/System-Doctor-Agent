@@ -1,0 +1,15 @@
+tree_id: update_driver_flow_v1
+root:
+  id: upd_001
+  question: Did symptoms begin within 48 hours of update/driver installation?
+  yes: upd_002
+  no: upd_003
+nodes:
+  upd_002:
+    question: Does Safe Mode reduce or remove the issue?
+    yes: diagnosis_windows_driver_regression
+    no: diagnosis_random_restart_power_or_driver_instability
+  upd_003:
+    question: Is issue tied to one app/device only?
+    yes: diagnosis_windows_driver_regression
+    no: diagnosis_windows_performance_background_tasks

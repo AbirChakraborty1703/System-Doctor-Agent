@@ -1,0 +1,1 @@
+Classify issue category and severity from user text. Return primary and secondary category with confidence.

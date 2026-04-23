@@ -1,0 +1,16 @@
+fault_matrix:
+  - symptom: overheat_fan_loud
+    likely_faults:
+      - cpu_cooler_efficiency_drop
+      - dust_blocked_airflow
+      - thermal_paste_degradation
+  - symptom: no_display_beep_code
+    likely_faults:
+      - ram_seating_or_failure
+      - gpu_initialization_failure
+      - motherboard_post_path_fault
+  - symptom: random_restart_under_load
+    likely_faults:
+      - psu_instability
+      - gpu_driver_or_power_spike
+      - thermal_shutdown_protection

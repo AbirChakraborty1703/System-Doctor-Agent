@@ -1,0 +1,6 @@
+suites:
+  - suites/core-diagnosis.yaml
+  - suites/cross-os-regression.yaml
+  - suites/safety-guardrails.yaml
+baselines:
+  - baselines/baseline-metrics.json

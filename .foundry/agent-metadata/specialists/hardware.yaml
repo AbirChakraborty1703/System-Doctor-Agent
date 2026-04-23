@@ -1,0 +1,5 @@
+id: hardware
+type: specialist
+domain: hardware
+owner: hardware-diagnostics
+responsibility: Diagnose physical component, power, thermal, and storage symptoms

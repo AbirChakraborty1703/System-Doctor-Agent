@@ -1,0 +1,10 @@
+schemas:
+  - json/agent-metadata.schema.json
+  - json/dataset-manifest.schema.json
+  - json/evaluator-config.schema.json
+  - json/experiment-run.schema.json
+  - json/result-summary.schema.json
+  - json/trace-record.schema.json
+  - json/report.schema.json
+  - yaml/benchmark-suite.schema.yaml
+  - yaml/run-config.schema.yaml

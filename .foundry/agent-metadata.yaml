@@ -1,0 +1,10 @@
+schema_version: 1
+metadata_ref: agent-metadata/agent-metadata.yaml
+defaultEnvironment: dev
+environments:
+  dev:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_DEV}
+  staging:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_STAGING}
+  prod:
+    projectEndpoint: ${FOUNDRY_PROJECT_ENDPOINT_PROD}

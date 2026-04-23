@@ -1,0 +1,7 @@
+pipeline:
+  id: evaluation
+  schedule: manual
+  steps:
+    - validate_dataset_manifests
+    - run_evaluator_runner
+    - publish_results

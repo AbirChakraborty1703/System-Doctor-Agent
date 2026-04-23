@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DatasetManifest",
+  "type": "object",
+  "required": ["dataset_id", "version", "task"],
+  "properties": {
+    "dataset_id": {"type": "string"},
+    "version": {"type": "string"},
+    "task": {"type": "string"}
+  }
+}

@@ -1,0 +1,10 @@
+defaults:
+  model_routing_profile: balanced
+  dataset_versions:
+    diagnosis: 1.0.0
+    remediation: 1.0.0
+    safety: 1.0.0
+  evaluator_bundle:
+    - diagnosis_accuracy
+    - remediation_quality
+    - safety_compliance

@@ -1,0 +1,8 @@
+templates:
+  - agent/agent-config.template.yaml
+  - dataset/dataset-manifest.template.yaml
+  - evaluator/evaluator-config.template.yaml
+  - experiment/experiment-run.template.yaml
+  - report/report.template.md
+  - benchmark/benchmark-suite.template.yaml
+  - trace/trace-record.template.json

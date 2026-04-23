@@ -1,0 +1,5 @@
+id: software
+type: specialist
+domain: software
+owner: software-diagnostics
+responsibility: Diagnose software stack, service, and dependency failures

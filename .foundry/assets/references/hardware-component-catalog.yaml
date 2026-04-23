@@ -1,0 +1,7 @@
+components:
+  - cpu
+  - gpu
+  - ram
+  - storage
+  - psu
+  - motherboard

@@ -1,0 +1,1 @@
+Score whether the predicted top diagnoses match the gold labels and whether the evidence supports the ranking.

@@ -1,0 +1,1 @@
+Focus on thermal, power, memory, display, and storage hardware symptoms.

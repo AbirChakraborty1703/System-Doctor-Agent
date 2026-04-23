@@ -1,0 +1,12 @@
+dataset_id: sdai-diagnosis-benchmark
+version: 1.0.0
+task: diagnosis_ranking
+source:
+  curated: datasets/curated/diagnosis
+splits:
+  train: datasets/splits/train
+  validation: datasets/splits/validation
+  test: datasets/splits/test
+labels:
+  - primary_root_cause
+  - secondary_root_cause

@@ -1,0 +1,1 @@
+Focus on hardware failure signals: thermal, power, storage, memory, and board-level symptoms.

@@ -1,0 +1,1 @@
+Apply macOS-focused diagnostics emphasizing safe recovery and log-based evidence.

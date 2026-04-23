@@ -1,0 +1,23 @@
+playbook_id: windows_driver_rollback
+title: Windows driver rollback flow
+os: windows
+risk_level: medium
+warnings:
+  - Driver rollback may temporarily disable device features.
+steps:
+  - action: Boot in Safe Mode to isolate third-party driver impact
+    command: null
+    risk: low
+    checkpoint: System stable in Safe Mode
+    rollback: Reboot back to normal mode
+  - action: Identify recently changed drivers
+    command: pnputil /enum-drivers
+    risk: low
+    checkpoint: Recent driver candidates identified
+    rollback: None
+  - action: Roll back or reinstall last known stable driver from Device Manager
+    command: null
+    risk: medium
+    checkpoint: Device reports stable status after reboot
+    rollback: Reinstall current driver package if rollback fails
+escalation_advice: If crashes persist, escalate to OEM driver package validation.
