@@ -1,128 +1,191 @@
 # SystemDoctor AI
 
-SystemDoctor AI is a production-style multi-agent troubleshooting assistant for hardware and software incidents across Windows, macOS, and Linux. It combines deterministic triage, adaptive questioning, evidence-backed diagnosis, safe remediation planning, and verification into a single Streamlit-based diagnostic console.
+SystemDoctor AI is an AI-powered diagnostic assistant for hardware and software troubleshooting. It helps users and support teams identify root causes faster, apply safe remediation steps, and verify outcomes across Windows, macOS, and Linux.
 
-## Features
+## Problem Statement
 
-- Free-text symptom intake
-- Adaptive follow-up questioning
-- Issue triage (category, severity, OS)
-- Top-3 diagnosis ranking with confidence and evidence
-- Safe remediation planning with risk guardrails
-- Verification loop and escalation guidance
-- Session report export
-- Streamlit diagnostic cockpit UI
-- FastAPI runtime endpoints for integration
-- Deterministic fallback when API keys are missing
+Diagnosing system issues is often slow, fragmented, and error-prone.
 
-## Tech Stack
+- End users struggle to identify real root causes.
+- Troubleshooting guidance is scattered across forums and vendor docs.
+- Generic fixes often fail because they ignore system context.
+- Support teams lose time in repetitive trial-and-error diagnosis.
 
-- Python 3.11+
-- Streamlit
-- FastAPI
-- Pydantic
-- SQLite
-- PyYAML
-- OpenAI / Gemini providers with deterministic fallback
-- Pytest
+SystemDoctor AI addresses this by combining structured questioning, evidence-based diagnosis, and safety-aware remediation in one guided workflow.
 
-## Repository layout
+## Key Features
 
-- apps/streamlit: Primary interactive diagnostic cockpit
-- apps/api: FastAPI endpoints for orchestration access
-- agents: Multi-agent implementation (orchestrator, triage, questioning, diagnosis, remediation, verification, specialists)
-- knowledge: Decision trees, playbooks, command catalog, mappings, taxonomies
-- packages/schemas: Typed contracts
-- packages/shared_utils: Config, storage, loader, safety, reporting, provider abstractions
-- tests: Unit, integration, and e2e tests
-- infra/docker: Container assets
-- .foundry: Foundry-ready metadata, evaluators, benchmarks, and experiment assets
+- Adaptive diagnostic questioning based on evidence gaps
+- Hardware and software troubleshooting support
+- Cross-platform workflows for Windows, macOS, and Linux
+- Confidence-based root-cause ranking
+- Safe, step-by-step remediation plans with risk labeling
+- Verification loop to confirm if issues are resolved
+- Optional online search enrichment when enabled
+- Offline fallback behavior for local-only operation
+- Local-first design for secure and resilient troubleshooting
+
+## How It Works
+
+1. User enters a system issue in natural language.
+2. System asks targeted follow-up questions.
+3. Diagnosis engine ranks probable causes with confidence.
+4. Remediation engine suggests safe corrective actions.
+5. Verification loop checks whether the fix worked.
+6. Final report is generated for review and export.
 
 ## Architecture Overview
 
-The project is organized as a layered workflow:
+SystemDoctor AI uses a modular multi-agent pipeline:
 
-- Intake and triage classify the issue and infer the operating system.
-- The question engine asks the next best question based on evidence gaps.
-- The diagnosis engine ranks the top three causes with confidence and supporting evidence.
-- The remediation engine generates safe, risk-labeled fix steps with rollback guidance.
-- The verification loop checks whether the fix worked and either closes, refines, or escalates the case.
-- The Streamlit dashboard presents the workflow in a polished enterprise-style console.
+- Orchestrator: Coordinates end-to-end diagnostic flow.
+- Triage: Classifies issue type, severity, and operating context.
+- Question Engine: Selects the next best question.
+- Diagnosis Engine: Produces confidence-ranked root causes.
+- Remediation Engine: Generates safe action plans.
+- Verification Engine: Confirms outcomes and manages escalation.
+- Specialist Agents: Domain-specific expertise by OS and issue class.
 
-## Quickstart (local)
+## Tech Stack
 
-1. Create and activate a virtual environment.
-2. Install dependencies:
+- Python
+- Streamlit
+- FastAPI
+- Pydantic schemas and typed models
+- Local knowledge files (YAML decision trees, taxonomies, playbooks)
+- Optional LLM integration (OpenAI, Gemini)
+- Offline deterministic fallback logic
+- Pytest-based unit, integration, and end-to-end tests
+
+## Project Structure
+
+- apps/: Entry points for Streamlit UI and API services.
+- agents/: Core orchestration, diagnostic, remediation, and specialist agents.
+- knowledge/: Decision trees, mappings, taxonomies, and troubleshooting playbooks.
+- packages/: Shared schemas and utility modules.
+- prompts/: System, specialist, and safety prompt templates.
+- tests/: Unit, integration, and e2e test suites.
+- infra/: Container and deployment assets.
+- .foundry/: Foundry metadata, templates, evaluators, and workflow scaffolding.
+
+## Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AbirChakraborty1703/System-Doctor-Agent.git
+cd System-Doctor
+```
+
+### 2. Create a virtual environment
+
+Windows (PowerShell):
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+Linux/macOS:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Copy environment template:
+### 4. Configure environment variables
+
+Windows:
 
 ```bash
 copy .env.example .env
 ```
 
-4. Run Streamlit app:
+Linux/macOS:
+
+```bash
+cp .env.example .env
+```
+
+### 5. Run locally
 
 ```bash
 streamlit run app.py
 ```
 
-5. Optional API runtime:
+## Configuration
+
+- Use .env.example as the baseline configuration template.
+- Add only the variables required for your selected provider/workflow.
+- The project can run without API keys using fallback/local logic.
+- Optional online or AI enrichment can be enabled by setting provider-specific variables in .env.
+
+Typical provider settings:
+
+- LLM_PROVIDER=openai with OPENAI_API_KEY
+- LLM_PROVIDER=gemini with GEMINI_API_KEY
+- LLM_PROVIDER=fallback for offline deterministic mode
+
+## Run Commands
+
+Install dependencies:
 
 ```bash
-uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload
+pip install -r requirements.txt
 ```
 
-## Running tests
+Start Streamlit:
+
+```bash
+streamlit run app.py
+```
+
+Run tests:
 
 ```bash
 pytest -q
 ```
 
-## LLM provider strategy
+Optional API server:
 
-- Set `LLM_PROVIDER=openai` and `OPENAI_API_KEY` for OpenAI.
-- Set `LLM_PROVIDER=gemini` and `GEMINI_API_KEY` for Gemini.
-- Keep `LLM_PROVIDER=fallback` to run fully local deterministic logic.
+```bash
+uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload
+```
 
-## Hackathon Context
+## Development Notes
 
-SystemDoctor AI is designed for a TCS-level innovation showcase: it demonstrates applied AI, deterministic decision support, safe automation, and a professional dashboard experience suitable for technical evaluation and live demos.
+- Local-first behavior is supported to reduce external dependencies.
+- Safety-first troubleshooting avoids destructive actions by default.
+- Diagnosis is confidence-based and evidence-driven.
+- The codebase is modular and designed for incremental extension.
+- Specialist agents can be expanded for deeper platform coverage.
 
-## Screenshots
+## GitHub Publication Readiness
 
-Add product screenshots here before publishing if desired.
+- Sensitive files are excluded through .gitignore.
+- Secrets, local tokens, and runtime artifacts should never be committed.
+- Generated caches, logs, traces, and temporary outputs are excluded.
+- Repository structure is prepared for safe public publishing.
+
+Recommended publish commands:
+
+```bash
+git remote add origin https://github.com/AbirChakraborty1703/System-Doctor-Agent.git
+git add .
+git commit -m "Add production-ready README and gitignore"
+git push -u origin main
+```
 
 ## Future Improvements
 
-- Add richer hardware telemetry ingestion.
-- Expand the knowledge base with more device-specific playbooks.
-- Add saved session export formats beyond Markdown.
-- Add authentication and multi-user session history for team deployments.
-
-## Safety model
-
-- Every remediation step receives a risk level.
-- Medium/high/critical steps require explicit confirmation.
-- Critical destructive actions are blocked by default.
-- Firmware/bootloader/disk operations trigger additional warning behavior.
-
-## Hackathon demo flow
-
-1. Enter free-text issue.
-2. Answer adaptive questions.
-3. Review top diagnoses and confidence bars.
-4. Apply safe remediation guidance.
-5. Verify outcome and loop if unresolved.
-6. Export final report.
-
-## Deployment readiness
-
-- Docker assets available in `infra/docker`.
-- API supports external integrations.
-- .foundry assets support future experiment/evaluation automation.
-- Structured logs and persisted sessions support operational tracking.
-- The repository is configured to be publication-safe and ignores local secrets, caches, logs, and generated database files.
+- Expand troubleshooting knowledge coverage across more device classes.
+- Add deeper OS-specific diagnostics and remediation intelligence.
+- Improve verification loop reasoning and recovery guidance.
+- Introduce richer report export formats and analytics.
+- Enhance UI observability and runtime telemetry.

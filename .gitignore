@@ -1,9 +1,42 @@
 # ------------------------------------------------------------
 # SystemDoctor AI - Git Ignore Rules
-# Keeps local, generated, and sensitive files out of version control.
+# Production-safe exclusions for secrets, local runtime files,
+# caches, and generated artifacts.
 # ------------------------------------------------------------
 
-# Python bytecode and extension artifacts
+# ------------------------------------------------------------
+# Environment and Secrets
+# ------------------------------------------------------------
+.env
+.env.*
+!.env.example
+.envrc
+
+# Secrets and credentials
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kubeconfig
+*.ovpn
+*secret*
+*secrets*
+*credential*
+*credentials*
+*token*
+auth.json
+credentials.json
+token.json
+service-account*.json
+gcp-service-account*.json
+azure-auth*.json
+
+# ------------------------------------------------------------
+# Python Artifacts
+# ------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *.pyo
@@ -18,8 +51,9 @@ env/
 ENV/
 __pypackages__/
 
-# Python tooling caches
+# Tool caches
 .pytest_cache/
+.pytest_cache_runtime/
 .mypy_cache/
 .ruff_cache/
 .pyre/
@@ -27,7 +61,7 @@ __pypackages__/
 .tox/
 .nox/
 
-# Coverage and build outputs
+# Coverage / build / packaging outputs
 .coverage
 .coverage.*
 coverage.xml
@@ -41,42 +75,62 @@ pip-wheel-metadata/
 # Notebook and data science noise
 .ipynb_checkpoints/
 
-# Streamlit local files
+# ------------------------------------------------------------
+# Streamlit and Local App Runtime
+# ------------------------------------------------------------
 .streamlit/secrets.toml
 .streamlit/cache/
 
-# IDE and editor settings
+# Local session/runtime database files
+apps/streamlit/session_store.db
+*.db
+*.sqlite
+*.sqlite3
+
+# ------------------------------------------------------------
+# IDE / Editor / OS Junk
+# ------------------------------------------------------------
 .vscode/
 .idea/
 *.code-workspace
+*.swp
+*.swo
+*~
 
-# OS-generated files
 .DS_Store
 Thumbs.db
 Desktop.ini
 
-# Environment and secrets
-.env
-.env.*
-!.env.example
-.envrc
-
-# Logs and local databases
+# ------------------------------------------------------------
+# Logs, Temp Files, and Runtime Caches
+# ------------------------------------------------------------
 *.log
-*.db
-*.sqlite
-*.sqlite3
-apps/streamlit/session_store.db
+*.out
+*.err
+logs/
+*.tmp
+*.temp
+*.cache
+cache/
+tmp/
+temp/
+pytest-cache-files-*/
 
-# Foundry generated/runtime outputs (keep scaffold only)
+# Local helper/runtime folders
+.sixth/
+
+# ------------------------------------------------------------
+# Foundry and AI Workflow Generated Artifacts
+# Keep .foundry scaffold source files versioned.
+# ------------------------------------------------------------
 .foundry/results/
 .foundry/logs/
 .foundry/traces/
+.foundry/cache/
 
-# Local temporary folders/files
-pytest-cache-files-*/
-*.tmp
-*.temp
-*.swp
-*.swo
-*~
+# ------------------------------------------------------------
+# Project-specific Generated Outputs
+# ------------------------------------------------------------
+eval/reports/*
+!eval/reports/.gitkeep
+
