@@ -46,6 +46,38 @@ def _to_bool(raw_value: str, default: bool = False) -> bool:
     return default
 
 
+def _to_int(raw_value: str | None, default: int, *, minimum: int | None = None, maximum: int | None = None) -> int:
+    try:
+        value = int((raw_value or "").strip())
+    except (TypeError, ValueError):
+        value = default
+
+    if minimum is not None:
+        value = max(minimum, value)
+    if maximum is not None:
+        value = min(maximum, value)
+    return value
+
+
+def _to_float(
+    raw_value: str | None,
+    default: float,
+    *,
+    minimum: float | None = None,
+    maximum: float | None = None,
+) -> float:
+    try:
+        value = float((raw_value or "").strip())
+    except (TypeError, ValueError):
+        value = default
+
+    if minimum is not None:
+        value = max(minimum, value)
+    if maximum is not None:
+        value = min(maximum, value)
+    return value
+
+
 @lru_cache(maxsize=1)
 def get_config() -> AppConfig:
     project_root = Path(__file__).resolve().parents[2]
@@ -70,16 +102,34 @@ def get_config() -> AppConfig:
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip(),
         gemini_api_key=os.getenv("GEMINI_API_KEY", "").strip(),
         gemini_model=os.getenv("GEMINI_MODEL", "gemini-1.5-flash").strip(),
-        max_questions=int(os.getenv("MAX_QUESTIONS", "6")),
-        min_confidence_to_stop_questions=float(
-            os.getenv("MIN_CONFIDENCE_TO_STOP_QUESTIONS", "0.72")
+        max_questions=_to_int(os.getenv("MAX_QUESTIONS"), 6, minimum=1, maximum=20),
+        min_confidence_to_stop_questions=_to_float(
+            os.getenv("MIN_CONFIDENCE_TO_STOP_QUESTIONS"),
+            0.72,
+            minimum=0.1,
+            maximum=0.99,
         ),
-        max_verification_loops=int(os.getenv("MAX_VERIFICATION_LOOPS", "2")),
+        max_verification_loops=_to_int(
+            os.getenv("MAX_VERIFICATION_LOOPS"),
+            2,
+            minimum=1,
+            maximum=10,
+        ),
         online_search_enabled_default=_to_bool(
             os.getenv("ONLINE_SEARCH_ENABLED", "false"),
             default=False,
         ),
-        online_search_timeout_seconds=int(os.getenv("ONLINE_SEARCH_TIMEOUT_SECONDS", "4")),
-        online_search_max_results=int(os.getenv("ONLINE_SEARCH_MAX_RESULTS", "4")),
+        online_search_timeout_seconds=_to_int(
+            os.getenv("ONLINE_SEARCH_TIMEOUT_SECONDS"),
+            4,
+            minimum=1,
+            maximum=30,
+        ),
+        online_search_max_results=_to_int(
+            os.getenv("ONLINE_SEARCH_MAX_RESULTS"),
+            4,
+            minimum=1,
+            maximum=20,
+        ),
         online_search_trusted_domains=trusted_domains,
     )

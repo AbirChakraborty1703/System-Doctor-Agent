@@ -1055,6 +1055,8 @@ def _render_intake(orchestrator: OrchestratorAgent, metadata: DeviceMetadata) ->
         st.session_state.session_id = session.session_id
         st.session_state.current_question = None
         st.rerun()
+    elif submitted:
+        st.warning("Please describe the issue before starting troubleshooting.")
 
 
 

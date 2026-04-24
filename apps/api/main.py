@@ -11,7 +11,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -64,19 +64,19 @@ async def add_security_headers(request, call_next):
 
 
 class StartSessionRequest(BaseModel):
-    issue: str
+    issue: str = Field(..., min_length=1, max_length=4000)
     metadata: DeviceMetadata = DeviceMetadata()
 
 
 class AnswerRequest(BaseModel):
-    question_id: str
-    question: str
-    target_signal: str
-    answer: str
+    question_id: str = Field(..., min_length=1, max_length=128)
+    question: str = Field(..., min_length=1, max_length=1000)
+    target_signal: str = Field(..., min_length=1, max_length=128)
+    answer: str = Field(..., min_length=1, max_length=4000)
 
 
 class VerifyRequest(BaseModel):
-    feedback: str
+    feedback: str = Field(..., min_length=1, max_length=1000)
 
 
 @app.get("/health")
@@ -102,7 +102,11 @@ def app_event_open_post() -> dict:
 
 @app.post("/sessions")
 def start_session(payload: StartSessionRequest) -> dict:
-    session = orchestrator.start_session(payload.issue, payload.metadata)
+    issue = payload.issue.strip()
+    if not issue:
+        raise HTTPException(status_code=422, detail="Issue must not be blank")
+
+    session = orchestrator.start_session(issue, payload.metadata)
     question = orchestrator.next_question(session)
     return {
         "session_id": session.session_id,
@@ -125,13 +129,17 @@ def submit_answer(session_id: str, payload: AnswerRequest) -> dict:
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
 
+    answer = payload.answer.strip()
+    if not answer:
+        raise HTTPException(status_code=422, detail="Answer must not be blank")
+
     question = Question(
         id=payload.question_id,
         text=payload.question,
         target_signal=payload.target_signal,
         information_gain=0.0,
     )
-    orchestrator.submit_answer(session, question, payload.answer)
+    orchestrator.submit_answer(session, question, answer)
 
     session = orchestrator.load_session(session_id)
     if not session:
@@ -155,7 +163,11 @@ def verify(session_id: str, payload: VerifyRequest) -> dict:
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
 
-    result = orchestrator.verify(session, payload.feedback)
+    feedback = payload.feedback.strip()
+    if not feedback:
+        raise HTTPException(status_code=422, detail="Feedback must not be blank")
+
+    result = orchestrator.verify(session, feedback)
     session = orchestrator.load_session(session_id)
     if not session:
         raise HTTPException(status_code=500, detail="Failed to reload session")

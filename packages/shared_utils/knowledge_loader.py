@@ -22,13 +22,24 @@ PLAYBOOK_ID_ALIASES = {
     "linux_package_repair": "linux_package_manager_recovery",
 }
 
+_PARSE_ERROR = object()
+
 
 def _load_structured_file(file_path: Path) -> Any:
     if not file_path.exists():
         return None
-    if file_path.suffix.lower() == ".json":
-        return json.loads(file_path.read_text(encoding="utf-8"))
-    return yaml.safe_load(file_path.read_text(encoding="utf-8"))
+
+    try:
+        raw_text = file_path.read_text(encoding="utf-8")
+    except OSError:
+        return _PARSE_ERROR
+
+    try:
+        if file_path.suffix.lower() == ".json":
+            return json.loads(raw_text)
+        return yaml.safe_load(raw_text)
+    except (json.JSONDecodeError, yaml.YAMLError, TypeError, ValueError):
+        return _PARSE_ERROR
 
 
 def _load_directory_map(directory: Path) -> Dict[str, Any]:
@@ -40,7 +51,10 @@ def _load_directory_map(directory: Path) -> Dict[str, Any]:
         if not file_path.is_file() or file_path.suffix.lower() not in {".yaml", ".yml", ".json"}:
             continue
         key = str(file_path.relative_to(directory)).replace("\\", "/")
-        payload[key] = _load_structured_file(file_path)
+        parsed = _load_structured_file(file_path)
+        if parsed is _PARSE_ERROR:
+            continue
+        payload[key] = parsed
     return payload
 
 
